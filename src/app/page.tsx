@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button";
+
 export default function Home() {
   return (
     <div>
-      <main>hello</main>
+      <Button>Hello Mimo!</Button>
     </div>
   );
 }
