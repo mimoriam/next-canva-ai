@@ -2,3 +2,5 @@ npm i -D prettier eslint-plugin-tailwindcss eslint-config-prettier eslint-plugin
 
 npx shadcn@latest init
 npx shadcn@latest add button
+
+npm i fabric
