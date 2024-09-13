@@ -1,0 +1,1 @@
+npm i -D prettier eslint-plugin-tailwindcss eslint-config-prettier eslint-plugin-prettier prettier-plugin-tailwindcss
