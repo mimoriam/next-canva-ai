@@ -1,14 +1,20 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import * as fabric from "fabric";
+import { useAutoResize } from "@/app/features/editor/hooks/use-auto-resize";
 
-export type useEditorProps = {
+interface UseEditorProps {
   initialCanvas: fabric.Canvas;
   initialContainer: HTMLDivElement;
-};
+}
 
 export const useEditor = () => {
+  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
+  useAutoResize({ canvas, container });
+
   const init = useCallback(
-    ({ initialCanvas, initialContainer }: useEditorProps) => {
+    ({ initialCanvas, initialContainer }: UseEditorProps) => {
       // Overriding Fabric's defaults:
       fabric.InteractiveFabricObject.ownDefaults = {
         ...fabric.InteractiveFabricObject.ownDefaults,
@@ -26,8 +32,8 @@ export const useEditor = () => {
         height: 1200,
         name: "clip",
         fill: "white",
-        // selectable: false,
-        // hasControls: false,
+        selectable: false,
+        hasControls: false,
         shadow: new fabric.Shadow({
           color: "rgba(0, 0, 0, 0.8)",
           blur: 5,
@@ -44,6 +50,9 @@ export const useEditor = () => {
 
       // If an object goes outside of workspace's defined boundaries, it would get clipped:
       initialCanvas.clipPath = initialWorkspace;
+
+      setCanvas(initialCanvas);
+      setContainer(initialContainer);
     },
     [],
   );
