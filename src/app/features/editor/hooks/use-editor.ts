@@ -48,6 +48,15 @@ export const useEditor = () => {
       initialCanvas.add(initialWorkspace);
       initialCanvas.centerObject(initialWorkspace);
 
+      const test = new fabric.Rect({
+        height: 100,
+        width: 100,
+        fill: "black",
+      });
+
+      initialCanvas.add(test);
+      initialCanvas.centerObject(test);
+
       // If an object goes outside of workspace's defined boundaries, it would get clipped:
       initialCanvas.clipPath = initialWorkspace;
 
