@@ -1,17 +1,61 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import * as fabric from "fabric";
 import { useAutoResize } from "@/app/features/editor/hooks/use-auto-resize";
+import {
+  BuildEditorProps,
+  Editor,
+} from "@/app/features/editor/types/editor.types";
+import { CIRCLE_OPTIONS } from "@/app/features/editor/types/shape-options.types";
 
 interface UseEditorProps {
   initialCanvas: fabric.Canvas;
   initialContainer: HTMLDivElement;
 }
 
+const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
+  const getWorkspace = () => {
+    return canvas.getObjects().find((object) => object.name === "clip");
+  };
+
+  const center = (object: fabric.Object) => {
+    const workspace = getWorkspace();
+    const center = workspace?.getCenterPoint();
+
+    if (!center) return;
+
+    canvas._centerObject(object, center);
+  };
+
+  const addToCanvas = (object: fabric.Object) => {
+    center(object);
+    canvas.add(object);
+    canvas.setActiveObject(object);
+  };
+
+  return {
+    addCircle: () => {
+      const object = new fabric.Circle({
+        ...CIRCLE_OPTIONS,
+      });
+
+      addToCanvas(object);
+    },
+  };
+};
+
 export const useEditor = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
 
   useAutoResize({ canvas, container });
+
+  const editor = useMemo(() => {
+    if (canvas) {
+      return buildEditor({ canvas });
+    }
+
+    return undefined;
+  }, [canvas]);
 
   const init = useCallback(
     ({ initialCanvas, initialContainer }: UseEditorProps) => {
@@ -66,5 +110,5 @@ export const useEditor = () => {
     [],
   );
 
-  return { init };
+  return { init, editor };
 };
