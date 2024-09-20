@@ -8,3 +8,6 @@ npm i fabric
 npx shadcn@latest add dropdown-menu
 npx shadcn@latest add tooltip
 npx shadcn@latest add separator
+npx shadcn@latest add scroll-area
+
+npm i react-icons
