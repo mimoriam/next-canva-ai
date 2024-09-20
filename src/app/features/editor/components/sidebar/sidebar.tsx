@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarItem } from "@/app/features/editor/components/sidebar-item";
+import { SidebarItem } from "@/app/features/editor/components/sidebar/sidebar-item";
 import {
   LayoutTemplate,
   ImageIcon,

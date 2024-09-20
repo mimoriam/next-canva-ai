@@ -4,10 +4,11 @@ import { useEditor } from "@/app/features/editor/hooks/use-editor";
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as fabric from "fabric";
 import { Navbar } from "@/app/features/editor/components/navbar";
-import { Sidebar } from "@/app/features/editor/components/sidebar";
+import { Sidebar } from "@/app/features/editor/components/sidebar/sidebar";
 import { Toolbar } from "@/app/features/editor/components/toolbar";
 import { Footer } from "@/app/features/editor/components/footer";
 import { ActiveTool } from "@/app/features/editor/types/active-tool.types";
+import { ShapeSidebar } from "@/app/features/editor/components/sidebar/shape-tool/shape-sidebar";
 
 export const Editor = () => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
@@ -64,6 +65,13 @@ export const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+
+        {/* Conditional Rendering from here till <main>: */}
+        <ShapeSidebar
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+
         <main className="relative flex flex-1 flex-col overflow-auto bg-muted">
           <Toolbar />
           <div
