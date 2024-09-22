@@ -23,6 +23,7 @@ export interface Editor {
   addDiamond: () => void;
 
   getActiveFillColor: () => string;
+  getActiveStrokeColor: () => string;
 
   canvas: fabric.Canvas;
 

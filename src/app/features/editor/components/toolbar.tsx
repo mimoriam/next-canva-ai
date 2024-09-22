@@ -19,9 +19,11 @@ export const Toolbar = ({
   onChangeActiveTool,
 }: ToolbarProps) => {
   const fillColor = editor?.getActiveFillColor();
+  const strokeColor = editor?.getActiveStrokeColor();
 
   const [properties, setProperties] = useState({
     fillColor,
+    strokeColor,
   });
 
   // Disable the fill icon if no object selected:
@@ -44,6 +46,22 @@ export const Toolbar = ({
             <div
               className="size-4 rounded-sm border"
               style={{ backgroundColor: properties.fillColor }}
+            />
+          </Button>
+        </Hint>
+      </div>
+
+      <div className="flex h-full items-center justify-center">
+        <Hint label="Stroke color" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool("stroke-color")}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === "stroke-color" && "bg-gray-100")}
+          >
+            <div
+              className="size-4 rounded-sm border-2 bg-white"
+              style={{ borderColor: properties.strokeColor }}
             />
           </Button>
         </Hint>
