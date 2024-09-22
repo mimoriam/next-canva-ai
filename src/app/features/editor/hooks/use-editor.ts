@@ -60,6 +60,67 @@ const buildEditor = ({
   };
 
   return {
+    getActiveFillColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return fillColor;
+      }
+
+      const value = selectedObject.get("fill") || fillColor;
+
+      // Currently, gradients & patterns are not supported
+      return value as string;
+    },
+
+    getActiveStrokeColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return strokeColor;
+      }
+
+      const value = selectedObject.get("stroke") || strokeColor;
+
+      return value;
+    },
+
+    getActiveStrokeWidth: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return strokeWidth;
+      }
+
+      const value = selectedObject.get("strokeWidth") || strokeWidth;
+
+      return value;
+    },
+
+    getActiveStrokeDashArray: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return strokeDashArray;
+      }
+
+      const value = selectedObject.get("strokeDashArray") || strokeDashArray;
+
+      return value;
+    },
+
+    getActiveOpacity: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return 1;
+      }
+
+      const value = selectedObject.get("opacity") || 1;
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -229,67 +290,6 @@ const buildEditor = ({
       );
 
       addToCanvas(object);
-    },
-
-    getActiveFillColor: () => {
-      const selectedObject = selectedObjects[0];
-
-      if (!selectedObject) {
-        return fillColor;
-      }
-
-      const value = selectedObject.get("fill") || fillColor;
-
-      // Currently, gradients & patterns are not supported
-      return value as string;
-    },
-
-    getActiveStrokeColor: () => {
-      const selectedObject = selectedObjects[0];
-
-      if (!selectedObject) {
-        return strokeColor;
-      }
-
-      const value = selectedObject.get("stroke") || strokeColor;
-
-      return value;
-    },
-
-    getActiveStrokeWidth: () => {
-      const selectedObject = selectedObjects[0];
-
-      if (!selectedObject) {
-        return strokeWidth;
-      }
-
-      const value = selectedObject.get("strokeWidth") || strokeWidth;
-
-      return value;
-    },
-
-    getActiveStrokeDashArray: () => {
-      const selectedObject = selectedObjects[0];
-
-      if (!selectedObject) {
-        return strokeDashArray;
-      }
-
-      const value = selectedObject.get("strokeDashArray") || strokeDashArray;
-
-      return value;
-    },
-
-    getActiveOpacity: () => {
-      const selectedObject = selectedObjects[0];
-
-      if (!selectedObject) {
-        return 1;
-      }
-
-      const value = selectedObject.get("opacity") || 1;
-
-      return value;
     },
 
     canvas,

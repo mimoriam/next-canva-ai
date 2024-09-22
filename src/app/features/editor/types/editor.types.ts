@@ -17,23 +17,11 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
-  addCircle: () => void;
-  addSoftRectangle: () => void;
-  addRectangle: () => void;
-  addTriangle: () => void;
-  addInverseTriangle: () => void;
-  addDiamond: () => void;
-
   getActiveFillColor: () => string;
   getActiveStrokeColor: () => string;
   getActiveStrokeWidth: () => number;
   getActiveStrokeDashArray: () => number[];
   getActiveOpacity: () => number;
-
-  canvas: fabric.Canvas;
-
-  strokeColor: string;
-  strokeWidth: number;
 
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
@@ -44,6 +32,16 @@ export interface Editor {
   bringForward: () => void;
   sendBackwards: () => void;
 
+  addCircle: () => void;
+  addSoftRectangle: () => void;
+  addRectangle: () => void;
+  addTriangle: () => void;
+  addInverseTriangle: () => void;
+  addDiamond: () => void;
+
+  canvas: fabric.Canvas;
+  strokeColor: string;
+  strokeWidth: number;
   selectedObjects: fabric.Object[];
 }
 
