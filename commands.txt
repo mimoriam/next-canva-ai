@@ -11,3 +11,8 @@ npx shadcn@latest add separator
 npx shadcn@latest add scroll-area
 
 npm i react-icons
+
+npm i react-color
+npm i -d @types/react-color
+npm i material-colors
+npm i -d @types/material-colors

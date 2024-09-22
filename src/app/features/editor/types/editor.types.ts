@@ -2,6 +2,16 @@ import * as fabric from "fabric";
 
 export type BuildEditorProps = {
   canvas: fabric.Canvas;
+
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+
+  setFillColor: (value: string) => void;
+  setStrokeColor: (value: string) => void;
+  setStrokeWidth: (value: number) => void;
+
+  selectedObjects: fabric.Object[];
 };
 
 export interface Editor {
@@ -11,4 +21,16 @@ export interface Editor {
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+
+  canvas: fabric.Canvas;
+
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+
+  changeFillColor: (value: string) => void;
+  changeStrokeColor: (value: string) => void;
+  changeStrokeWidth: (value: number) => void;
+
+  selectedObjects: fabric.Object[];
 }
