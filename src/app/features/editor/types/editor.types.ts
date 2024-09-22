@@ -22,9 +22,10 @@ export interface Editor {
   addInverseTriangle: () => void;
   addDiamond: () => void;
 
+  getActiveFillColor: () => string;
+
   canvas: fabric.Canvas;
 
-  fillColor: string;
   strokeColor: string;
   strokeWidth: number;
 
@@ -33,4 +34,8 @@ export interface Editor {
   changeStrokeWidth: (value: number) => void;
 
   selectedObjects: fabric.Object[];
+}
+
+export interface EditorHookProps {
+  clearSelectionCallback?: () => void;
 }

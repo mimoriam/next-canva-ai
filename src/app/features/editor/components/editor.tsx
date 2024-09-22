@@ -10,6 +10,7 @@ import { Footer } from "@/app/features/editor/components/footer";
 import { ActiveTool } from "@/app/features/editor/types/active-tool.types";
 import { ShapeSidebar } from "@/app/features/editor/components/sidebar/shape-tool/shape-sidebar";
 import { FillColorSidebar } from "@/app/features/editor/components/sidebar/fill-color/fill-color-sidebar";
+import { selectionDependentTools } from "@/app/features/editor/types/selection-dependent-tools.types";
 
 export const Editor = () => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
@@ -33,7 +34,15 @@ export const Editor = () => {
     [activeTool],
   );
 
-  const { init, editor } = useEditor();
+  const onClearSelection = useCallback(() => {
+    if (selectionDependentTools.includes(activeTool)) {
+      setActiveTool("select");
+    }
+  }, [activeTool]);
+
+  const { init, editor } = useEditor({
+    clearSelectionCallback: onClearSelection,
+  });
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);

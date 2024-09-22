@@ -4,11 +4,13 @@ import { useEffect } from "react";
 interface UseCanvasEventsProps {
   canvas: fabric.Canvas | null;
   setSelectedObjects: (objects: fabric.Object[]) => void;
+  clearSelectionCallback?: () => void;
 }
 
 export const useCanvasEvents = ({
   canvas,
   setSelectedObjects,
+  clearSelectionCallback,
 }: UseCanvasEventsProps) => {
   let disposeCreated: VoidFunction;
   let disposeUpdated: VoidFunction;
@@ -24,6 +26,7 @@ export const useCanvasEvents = ({
       });
       disposeCleared = canvas.on("selection:cleared", () => {
         setSelectedObjects([]);
+        clearSelectionCallback?.();
       });
     }
 
@@ -37,5 +40,5 @@ export const useCanvasEvents = ({
         disposeCleared();
       }
     };
-  }, [canvas, setSelectedObjects]);
+  }, [canvas, setSelectedObjects, clearSelectionCallback]);
 };
