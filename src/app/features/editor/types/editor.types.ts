@@ -28,6 +28,7 @@ export interface Editor {
   getActiveStrokeColor: () => string;
   getActiveStrokeWidth: () => number;
   getActiveStrokeDashArray: () => number[];
+  getActiveOpacity: () => number;
 
   canvas: fabric.Canvas;
 
@@ -38,6 +39,7 @@ export interface Editor {
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
+  changeOpacity: (value: number) => void;
 
   bringForward: () => void;
   sendBackwards: () => void;
