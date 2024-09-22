@@ -39,6 +39,9 @@ export interface Editor {
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
 
+  bringForward: () => void;
+  sendBackwards: () => void;
+
   selectedObjects: fabric.Object[];
 }
 

@@ -102,6 +102,30 @@ const buildEditor = ({
       canvas.renderAll();
     },
 
+    bringForward: () => {
+      canvas.getActiveObjects().forEach((object) => {
+        canvas.bringObjectForward(object);
+      });
+
+      canvas.renderAll();
+
+      //* Bugfix: Items go above workspace (fixed):
+      const workspace = getWorkspace();
+      workspace?.canvas?.sendObjectBackwards(workspace);
+    },
+
+    sendBackwards: () => {
+      canvas.getActiveObjects().forEach((object) => {
+        canvas.sendObjectBackwards(object);
+      });
+
+      canvas.renderAll();
+
+      //* Bugfix: Items go behind workspace (fixed):
+      const workspace = getWorkspace();
+      workspace?.canvas?.sendObjectBackwards(workspace);
+    },
+
     addCircle: () => {
       const object = new fabric.Circle({
         ...CIRCLE_OPTIONS,
