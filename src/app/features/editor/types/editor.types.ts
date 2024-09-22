@@ -6,10 +6,12 @@ export type BuildEditorProps = {
   fillColor: string;
   strokeColor: string;
   strokeWidth: number;
+  strokeDashArray: number[];
 
   setFillColor: (value: string) => void;
   setStrokeColor: (value: string) => void;
   setStrokeWidth: (value: number) => void;
+  setStrokeDashArray: (value: number[]) => void;
 
   selectedObjects: fabric.Object[];
 };
@@ -25,6 +27,7 @@ export interface Editor {
   getActiveFillColor: () => string;
   getActiveStrokeColor: () => string;
   getActiveStrokeWidth: () => number;
+  getActiveStrokeDashArray: () => number[];
 
   canvas: fabric.Canvas;
 
@@ -34,6 +37,7 @@ export interface Editor {
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
+  changeStrokeDashArray: (value: number[]) => void;
 
   selectedObjects: fabric.Object[];
 }

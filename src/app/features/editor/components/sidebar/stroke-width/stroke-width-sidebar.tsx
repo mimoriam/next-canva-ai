@@ -1,12 +1,16 @@
 import { Editor } from "@/app/features/editor/types/editor.types";
 import { ActiveTool } from "@/app/features/editor/types/active-tool.types";
-import { STROKE_WIDTH } from "@/app/features/editor/types/shape-options.types";
+import {
+  STROKE_DASH_ARRAY,
+  STROKE_WIDTH,
+} from "@/app/features/editor/types/shape-options.types";
 import { cn } from "@/lib/utils";
 import { ToolSidebarHeader } from "@/app/features/editor/components/sidebar/tool-sidebar-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { ToolSidebarClose } from "@/app/features/editor/components/sidebar/tool-sidebar-close";
+import { Button } from "@/components/ui/button";
 
 interface StrokeWidthSidebarProps {
   editor: Editor | undefined;
@@ -20,6 +24,7 @@ export const StrokeWidthSidebar = ({
   onChangeActiveTool,
 }: StrokeWidthSidebarProps) => {
   const widthValue = editor?.getActiveStrokeWidth() || STROKE_WIDTH;
+  const typeValue = editor?.getActiveStrokeDashArray() || STROKE_DASH_ARRAY;
 
   const onClose = () => {
     onChangeActiveTool("select");
@@ -27,6 +32,10 @@ export const StrokeWidthSidebar = ({
 
   const onChangeStrokeWidth = (value: number) => {
     editor?.changeStrokeWidth(value);
+  };
+
+  const onChangeStrokeType = (value: number[]) => {
+    editor?.changeStrokeDashArray(value);
   };
 
   return (
@@ -48,8 +57,39 @@ export const StrokeWidthSidebar = ({
             onValueChange={(values) => onChangeStrokeWidth(values[0])}
           />
         </div>
+        <div className="space-y-4 border-b p-4">
+          <Label className="text-sm">Stroke type</Label>
+          <Button
+            onClick={() => onChangeStrokeType([])}
+            variant="secondary"
+            size="lg"
+            className={cn(
+              "h-16 w-full justify-start text-left",
+              JSON.stringify(typeValue) === `[]` && "border-2 border-blue-500",
+            )}
+            style={{
+              padding: "8px 16px",
+            }}
+          >
+            <div className="w-full rounded-full border-4 border-black" />
+          </Button>
+          <Button
+            onClick={() => onChangeStrokeType([5, 5])}
+            variant="secondary"
+            size="lg"
+            className={cn(
+              "h-16 w-full justify-start text-left",
+              JSON.stringify(typeValue) === `[5,5]` &&
+                "border-2 border-blue-500",
+            )}
+            style={{
+              padding: "8px 16px",
+            }}
+          >
+            <div className="w-full rounded-full border-4 border-dashed border-black" />
+          </Button>
+        </div>
       </ScrollArea>
-
       <ToolSidebarClose onClick={onClose} />
     </aside>
   );
