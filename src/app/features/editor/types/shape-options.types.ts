@@ -49,7 +49,7 @@ export const TRIANGLE_OPTIONS = {
 };
 
 export const TEXT_OPTIONS = {
-  type: "textbox",
+  // type: "textbox",
   left: 100,
   top: 100,
   fill: FILL_COLOR,

@@ -15,6 +15,7 @@ import {
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
   STROKE_WIDTH,
+  TEXT_OPTIONS,
   TRIANGLE_OPTIONS,
 } from "@/app/features/editor/types/shape-options.types";
 import { useCanvasEvents } from "@/app/features/editor/hooks/use-canvas-events";
@@ -288,6 +289,16 @@ const buildEditor = ({
           strokeDashArray: strokeDashArray,
         },
       );
+
+      addToCanvas(object);
+    },
+
+    addText: (value, options) => {
+      const object = new fabric.Textbox(value, {
+        ...TEXT_OPTIONS,
+        fill: fillColor,
+        ...options,
+      });
 
       addToCanvas(object);
     },

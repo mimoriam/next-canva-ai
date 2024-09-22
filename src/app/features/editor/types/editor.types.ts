@@ -39,6 +39,8 @@ export interface Editor {
   addInverseTriangle: () => void;
   addDiamond: () => void;
 
+  addText: (value: string, options?: Partial<fabric.TextboxProps>) => void;
+
   canvas: fabric.Canvas;
   strokeColor: string;
   strokeWidth: number;
