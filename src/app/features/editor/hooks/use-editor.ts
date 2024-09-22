@@ -203,6 +203,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveStrokeWidth: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return strokeWidth;
+      }
+
+      const value = selectedObject.get("strokeWidth") || strokeWidth;
+
+      return value;
+    },
+
     canvas,
     strokeColor,
     strokeWidth,

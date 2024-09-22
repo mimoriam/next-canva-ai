@@ -24,6 +24,7 @@ export interface Editor {
 
   getActiveFillColor: () => string;
   getActiveStrokeColor: () => string;
+  getActiveStrokeWidth: () => number;
 
   canvas: fabric.Canvas;
 

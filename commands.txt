@@ -16,3 +16,6 @@ npm i react-color
 npm i -d @types/react-color
 npm i material-colors
 npm i -d @types/material-colors
+
+npx shadcn@latest add label
+npx shadcn@latest add slider
