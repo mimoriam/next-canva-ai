@@ -30,6 +30,7 @@ export interface Editor {
   getActiveFontWeight: () => number;
   getActiveFontStyle: () => string;
   getActiveFontUnderline: () => boolean;
+  getActiveFontLinethrough: () => boolean;
 
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
@@ -41,6 +42,7 @@ export interface Editor {
   changeFontWeight: (value: number) => void;
   changeFontStyle: (value: string) => void;
   changeFontUnderline: (value: boolean) => void;
+  changeFontLinethrough: (value: boolean) => void;
 
   bringForward: () => void;
   sendBackwards: () => void;

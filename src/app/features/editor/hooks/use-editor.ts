@@ -174,6 +174,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveFontLinethrough: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return false;
+      }
+
+      const value = selectedObject.get("linethrough") || false;
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -261,6 +273,16 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         if (isTextTypeObject(object)) {
           object.set({ underline: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+
+    changeFontLinethrough: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextTypeObject(object)) {
+          object.set({ linethrough: value });
         }
       });
 

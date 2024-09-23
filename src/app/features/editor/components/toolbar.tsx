@@ -13,7 +13,12 @@ import {
   isTextType,
   isTextTypeObject,
 } from "@/app/features/editor/utils/is-text-type";
-import { FaBold, FaItalic, FaUnderline } from "react-icons/fa6";
+import {
+  FaBold,
+  FaItalic,
+  FaStrikethrough,
+  FaUnderline,
+} from "react-icons/fa6";
 import { FONT_WEIGHT } from "@/app/features/editor/types/shape-options.types";
 
 interface ToolbarProps {
@@ -33,6 +38,7 @@ export const Toolbar = ({
   const initialFontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
   const initialFontStyle = editor?.getActiveFontStyle();
   const initialFontUnderline = editor?.getActiveFontUnderline();
+  const initialFontLinethrough = editor?.getActiveFontLinethrough();
 
   const selectedObject = editor?.selectedObjects[0];
   const selectedObjectType = editor?.selectedObjects[0]?.type;
@@ -48,6 +54,7 @@ export const Toolbar = ({
     fontWeight: initialFontWeight,
     fontStyle: initialFontStyle,
     fontUnderline: initialFontUnderline,
+    fontLinethrough: initialFontLinethrough,
   });
 
   const toggleBold = () => {
@@ -90,6 +97,20 @@ export const Toolbar = ({
     setProperties((current) => ({
       ...current,
       fontUnderline: newValue,
+    }));
+  };
+
+  const toggleLinethrough = () => {
+    if (!selectedObject) {
+      return;
+    }
+
+    const newValue = properties.fontLinethrough ? false : true;
+
+    editor?.changeFontLinethrough(newValue);
+    setProperties((current) => ({
+      ...current,
+      fontLinethrough: newValue,
     }));
   };
 
@@ -214,6 +235,21 @@ export const Toolbar = ({
               className={cn(properties.fontUnderline && "bg-gray-100")}
             >
               <FaUnderline className="size-4" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+
+      {isText && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Strike" side="bottom" sideOffset={5}>
+            <Button
+              onClick={toggleLinethrough}
+              size="icon"
+              variant="ghost"
+              className={cn(properties.fontLinethrough && "bg-gray-100")}
+            >
+              <FaStrikethrough className="size-4" />
             </Button>
           </Hint>
         </div>
