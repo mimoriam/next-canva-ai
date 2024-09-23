@@ -30,7 +30,7 @@ import {
   FONT_SIZE,
   FONT_WEIGHT,
 } from "@/app/features/editor/types/shape-options.types";
-import { FontSizeInput } from "@/app/features/editor/components/font-size-tool/font-size-input";
+import { FontSizeInput } from "@/app/features/editor/components/sidebar/font-size-tool/font-size-input";
 
 interface ToolbarProps {
   editor: Editor | undefined;
