@@ -26,7 +26,11 @@ import {
   FaStrikethrough,
   FaUnderline,
 } from "react-icons/fa6";
-import { FONT_WEIGHT } from "@/app/features/editor/types/shape-options.types";
+import {
+  FONT_SIZE,
+  FONT_WEIGHT,
+} from "@/app/features/editor/types/shape-options.types";
+import { FontSizeInput } from "@/app/features/editor/components/font-size-tool/font-size-input";
 
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -46,6 +50,7 @@ export const Toolbar = ({
   const initialFontStyle = editor?.getActiveFontStyle();
   const initialFontUnderline = editor?.getActiveFontUnderline();
   const initialFontLinethrough = editor?.getActiveFontLinethrough();
+  const initialFontSize = editor?.getActiveFontSize() || FONT_SIZE;
 
   const initialTextAlign = editor?.getActiveTextAlign();
 
@@ -64,6 +69,7 @@ export const Toolbar = ({
     fontStyle: initialFontStyle,
     fontUnderline: initialFontUnderline,
     fontLinethrough: initialFontLinethrough,
+    fontSize: initialFontSize,
 
     textAlign: initialTextAlign,
   });
@@ -122,6 +128,18 @@ export const Toolbar = ({
     setProperties((current) => ({
       ...current,
       fontLinethrough: newValue,
+    }));
+  };
+
+  const onChangeFontSize = (value: number) => {
+    if (!selectedObject) {
+      return;
+    }
+
+    editor?.changeFontSize(value);
+    setProperties((current) => ({
+      ...current,
+      fontSize: value,
     }));
   };
 
@@ -320,6 +338,15 @@ export const Toolbar = ({
               <AlignRight className="size-4" />
             </Button>
           </Hint>
+        </div>
+      )}
+
+      {isText && (
+        <div className="flex h-full items-center justify-center">
+          <FontSizeInput
+            value={properties.fontSize}
+            onChange={onChangeFontSize}
+          />
         </div>
       )}
 

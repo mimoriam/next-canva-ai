@@ -19,3 +19,4 @@ npm i -d @types/material-colors
 
 npx shadcn@latest add label
 npx shadcn@latest add slider
+npx shadcn@latest add input

@@ -31,6 +31,7 @@ export interface Editor {
   getActiveFontStyle: () => string;
   getActiveFontUnderline: () => boolean;
   getActiveFontLinethrough: () => boolean;
+  getActiveFontSize: () => number;
 
   getActiveTextAlign: () => string;
 
@@ -45,6 +46,7 @@ export interface Editor {
   changeFontStyle: (value: string) => void;
   changeFontUnderline: (value: boolean) => void;
   changeFontLinethrough: (value: boolean) => void;
+  changeFontSize: (value: number) => void;
 
   changeTextAlign: (value: string) => void;
 
