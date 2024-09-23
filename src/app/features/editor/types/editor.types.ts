@@ -13,6 +13,9 @@ export type BuildEditorProps = {
   setStrokeWidth: (value: number) => void;
   setStrokeDashArray: (value: number[]) => void;
 
+  fontFamily: string;
+  setFontFamily: (value: string) => void;
+
   selectedObjects: fabric.Object[];
 };
 
@@ -23,11 +26,15 @@ export interface Editor {
   getActiveStrokeDashArray: () => number[];
   getActiveOpacity: () => number;
 
+  getActiveFontFamily: () => string;
+
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeDashArray: (value: number[]) => void;
   changeOpacity: (value: number) => void;
+
+  changeFontFamily: (value: string) => void;
 
   bringForward: () => void;
   sendBackwards: () => void;

@@ -39,6 +39,9 @@ const buildEditor = ({
   setStrokeWidth,
   setStrokeDashArray,
 
+  fontFamily,
+  setFontFamily,
+
   selectedObjects,
 }: BuildEditorProps): Editor => {
   const getWorkspace = () => {
@@ -122,6 +125,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveFontFamily: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return fontFamily;
+      }
+
+      const value = selectedObject.get("fontFamily") || fontFamily;
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -169,6 +184,17 @@ const buildEditor = ({
     changeOpacity: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {
         object.set({ opacity: value });
+      });
+
+      canvas.renderAll();
+    },
+
+    changeFontFamily: (value: string) => {
+      setFontFamily(value);
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextTypeObject(object)) {
+          object.set({ fontFamily: value });
+        }
       });
 
       canvas.renderAll();
@@ -340,6 +366,9 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         setStrokeWidth,
         setStrokeDashArray,
 
+        fontFamily,
+        setFontFamily,
+
         selectedObjects,
       });
     }
@@ -351,6 +380,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     strokeWidth,
     strokeColor,
     strokeDashArray,
+
+    fontFamily,
 
     selectedObjects,
   ]);
@@ -389,15 +420,6 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
       initialCanvas.add(initialWorkspace);
       initialCanvas.centerObject(initialWorkspace);
-
-      // const test = new fabric.Rect({
-      //   height: 100,
-      //   width: 100,
-      //   fill: "black",
-      // });
-      //
-      // initialCanvas.add(test);
-      // initialCanvas.centerObject(test);
 
       // If an object goes outside of workspace's defined boundaries, it would get clipped:
       initialCanvas.clipPath = initialWorkspace;
