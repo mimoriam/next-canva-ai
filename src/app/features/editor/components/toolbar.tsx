@@ -27,10 +27,10 @@ export const Toolbar = ({
   activeTool,
   onChangeActiveTool,
 }: ToolbarProps) => {
-  const fillColor = editor?.getActiveFillColor();
-  const strokeColor = editor?.getActiveStrokeColor();
-  const fontFamily = editor?.getActiveFontFamily();
-  const fontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
+  const initialFillColor = editor?.getActiveFillColor();
+  const initialStrokeColor = editor?.getActiveStrokeColor();
+  const initialFontFamily = editor?.getActiveFontFamily();
+  const initialFontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
 
   const selectedObject = editor?.selectedObjects[0];
   const selectedObjectType = editor?.selectedObjects[0]?.type;
@@ -40,10 +40,10 @@ export const Toolbar = ({
   const isImage = selectedObjectType === "image";
 
   const [properties, setProperties] = useState({
-    fillColor,
-    strokeColor,
-    fontFamily,
-    fontWeight,
+    fillColor: initialFillColor,
+    strokeColor: initialStrokeColor,
+    fontFamily: initialFontFamily,
+    fontWeight: initialFontWeight,
   });
 
   const toggleBold = () => {
