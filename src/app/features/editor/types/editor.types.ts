@@ -62,6 +62,8 @@ export interface Editor {
 
   addText: (value: string, options?: Partial<fabric.TextboxProps>) => void;
 
+  delete: () => void;
+
   canvas: fabric.Canvas;
   strokeColor: string;
   strokeWidth: number;
