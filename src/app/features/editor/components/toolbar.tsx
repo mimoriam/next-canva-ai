@@ -13,6 +13,8 @@ import {
   isTextType,
   isTextTypeObject,
 } from "@/app/features/editor/utils/is-text-type";
+import { FaBold } from "react-icons/fa6";
+import { FONT_WEIGHT } from "@/app/features/editor/types/shape-options.types";
 
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -28,6 +30,7 @@ export const Toolbar = ({
   const fillColor = editor?.getActiveFillColor();
   const strokeColor = editor?.getActiveStrokeColor();
   const fontFamily = editor?.getActiveFontFamily();
+  const fontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
 
   const selectedObject = editor?.selectedObjects[0];
   const selectedObjectType = editor?.selectedObjects[0]?.type;
@@ -40,7 +43,22 @@ export const Toolbar = ({
     fillColor,
     strokeColor,
     fontFamily,
+    fontWeight,
   });
+
+  const toggleBold = () => {
+    if (!selectedObject) {
+      return;
+    }
+
+    const newValue = properties.fontWeight > 500 ? 500 : 700;
+
+    editor?.changeFontWeight(newValue);
+    setProperties((current) => ({
+      ...current,
+      fontWeight: newValue,
+    }));
+  };
 
   // Disable the fill icon if no object selected:
   if (editor?.selectedObjects.length === 0) {
@@ -118,6 +136,21 @@ export const Toolbar = ({
                 {properties.fontFamily}
               </div>
               <ChevronDown className="ml-2 size-4 shrink-0" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+
+      {isText && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Bold" side="bottom" sideOffset={5}>
+            <Button
+              onClick={toggleBold}
+              size="icon"
+              variant="ghost"
+              className={cn(properties.fontWeight > 500 && "bg-gray-100")}
+            >
+              <FaBold className="size-4" />
             </Button>
           </Hint>
         </div>

@@ -27,6 +27,7 @@ export interface Editor {
   getActiveOpacity: () => number;
 
   getActiveFontFamily: () => string;
+  getActiveFontWeight: () => number;
 
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
@@ -35,6 +36,7 @@ export interface Editor {
   changeOpacity: (value: number) => void;
 
   changeFontFamily: (value: string) => void;
+  changeFontWeight: (value: number) => void;
 
   bringForward: () => void;
   sendBackwards: () => void;

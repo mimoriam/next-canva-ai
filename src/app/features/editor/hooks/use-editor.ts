@@ -11,6 +11,7 @@ import {
   DIAMOND_OPTIONS,
   FILL_COLOR,
   FONT_FAMILY,
+  FONT_WEIGHT,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -137,6 +138,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveFontWeight: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return FONT_WEIGHT;
+      }
+
+      const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -194,6 +207,16 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         if (isTextTypeObject(object)) {
           object.set({ fontFamily: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+
+    changeFontWeight: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextTypeObject(object)) {
+          object.set({ fontWeight: value });
         }
       });
 
