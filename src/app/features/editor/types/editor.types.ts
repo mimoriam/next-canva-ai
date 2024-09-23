@@ -32,6 +32,8 @@ export interface Editor {
   getActiveFontUnderline: () => boolean;
   getActiveFontLinethrough: () => boolean;
 
+  getActiveTextAlign: () => string;
+
   changeFillColor: (value: string) => void;
   changeStrokeColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
@@ -43,6 +45,8 @@ export interface Editor {
   changeFontStyle: (value: string) => void;
   changeFontUnderline: (value: boolean) => void;
   changeFontLinethrough: (value: boolean) => void;
+
+  changeTextAlign: (value: string) => void;
 
   bringForward: () => void;
   sendBackwards: () => void;

@@ -186,6 +186,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveTextAlign: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return "left";
+      }
+
+      const value = selectedObject.get("textAlign") || "left";
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -283,6 +295,16 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         if (isTextTypeObject(object)) {
           object.set({ linethrough: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+
+    changeTextAlign: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextTypeObject(object)) {
+          object.set({ textAlign: value });
         }
       });
 
