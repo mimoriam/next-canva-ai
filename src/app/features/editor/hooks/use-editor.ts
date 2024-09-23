@@ -150,6 +150,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveFontStyle: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return "normal";
+      }
+
+      const value = selectedObject.get("fontStyle") || "normal";
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -217,6 +229,16 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         if (isTextTypeObject(object)) {
           object.set({ fontWeight: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+
+    changeFontStyle: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextTypeObject(object)) {
+          object.set({ fontStyle: value });
         }
       });
 
