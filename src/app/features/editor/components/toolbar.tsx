@@ -13,7 +13,7 @@ import {
   isTextType,
   isTextTypeObject,
 } from "@/app/features/editor/utils/is-text-type";
-import { FaBold, FaItalic } from "react-icons/fa6";
+import { FaBold, FaItalic, FaUnderline } from "react-icons/fa6";
 import { FONT_WEIGHT } from "@/app/features/editor/types/shape-options.types";
 
 interface ToolbarProps {
@@ -32,6 +32,7 @@ export const Toolbar = ({
   const initialFontFamily = editor?.getActiveFontFamily();
   const initialFontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
   const initialFontStyle = editor?.getActiveFontStyle();
+  const initialFontUnderline = editor?.getActiveFontUnderline();
 
   const selectedObject = editor?.selectedObjects[0];
   const selectedObjectType = editor?.selectedObjects[0]?.type;
@@ -46,6 +47,7 @@ export const Toolbar = ({
     fontFamily: initialFontFamily,
     fontWeight: initialFontWeight,
     fontStyle: initialFontStyle,
+    fontUnderline: initialFontUnderline,
   });
 
   const toggleBold = () => {
@@ -74,6 +76,20 @@ export const Toolbar = ({
     setProperties((current) => ({
       ...current,
       fontStyle: newValue,
+    }));
+  };
+
+  const toggleUnderline = () => {
+    if (!selectedObject) {
+      return;
+    }
+
+    const newValue = properties.fontUnderline ? false : true;
+
+    editor?.changeFontUnderline(newValue);
+    setProperties((current) => ({
+      ...current,
+      fontUnderline: newValue,
     }));
   };
 
@@ -183,6 +199,21 @@ export const Toolbar = ({
               className={cn(properties.fontStyle === "italic" && "bg-gray-100")}
             >
               <FaItalic className="size-4" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+
+      {isText && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Underline" side="bottom" sideOffset={5}>
+            <Button
+              onClick={toggleUnderline}
+              size="icon"
+              variant="ghost"
+              className={cn(properties.fontUnderline && "bg-gray-100")}
+            >
+              <FaUnderline className="size-4" />
             </Button>
           </Hint>
         </div>

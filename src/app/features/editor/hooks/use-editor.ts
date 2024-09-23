@@ -162,6 +162,18 @@ const buildEditor = ({
       return value;
     },
 
+    getActiveFontUnderline: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return false;
+      }
+
+      const value = selectedObject.get("underline") || false;
+
+      return value;
+    },
+
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
@@ -239,6 +251,16 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         if (isTextTypeObject(object)) {
           object.set({ fontStyle: value });
+        }
+      });
+
+      canvas.renderAll();
+    },
+
+    changeFontUnderline: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextTypeObject(object)) {
+          object.set({ underline: value });
         }
       });
 
