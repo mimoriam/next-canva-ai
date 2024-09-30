@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Editor } from "@/app/features/editor/types/editor.types";
 import { ActiveTool } from "@/app/features/editor/types/active-tool.types";
-import { useRemoveBg } from "@/app/features/ai/use-remove-bg";
+import { useRemoveBg } from "@/app/features/ai/api/use-remove-bg";
 import * as fabric from "fabric";
 import { cn } from "@/lib/utils";
 import { ToolSidebarHeader } from "@/app/features/editor/components/sidebar/tool-sidebar-header";

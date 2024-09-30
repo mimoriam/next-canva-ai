@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ToolSidebarClose } from "@/app/features/editor/components/sidebar/tool-sidebar-close";
 import React, { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { useGenerateImage } from "@/app/features/ai/use-generate-image";
+import { useGenerateImage } from "@/app/features/ai/api/use-generate-image";
 
 interface AiSidebarProps {
   editor: Editor | undefined;
