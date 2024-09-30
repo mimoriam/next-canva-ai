@@ -3,6 +3,7 @@
     "next/core-web-vitals",
     "next/typescript",
     "plugin:tailwindcss/recommended",
+    "plugin:@tanstack/query/recommended",
     "prettier"
   ],
   "plugins": ["prettier"],

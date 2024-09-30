@@ -22,3 +22,5 @@ npx shadcn@latest add slider
 npx shadcn@latest add input
 
 npm i hono
+npm i @tanstack/react-query
+npm i -D @tanstack/eslint-plugin-query

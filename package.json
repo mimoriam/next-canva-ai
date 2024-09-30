@@ -16,6 +16,7 @@
     "@radix-ui/react-slider": "^1.2.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@tanstack/react-query": "^5.56.2",
     "@types/material-colors": "^1.2.3",
     "@types/react-color": "^3.0.12",
     "class-variance-authority": "^0.7.0",
@@ -33,6 +34,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.58.1",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
