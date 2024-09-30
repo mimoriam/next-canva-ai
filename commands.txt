@@ -26,3 +26,5 @@ npm i @tanstack/react-query
 npm i -D @tanstack/eslint-plugin-query
 
 npm i unsplash-js
+
+npm i uploadthing @uploadthing/react
