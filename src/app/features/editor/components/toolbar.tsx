@@ -32,6 +32,7 @@ import {
   FONT_WEIGHT,
 } from "@/app/features/editor/types/shape-options.types";
 import { FontSizeInput } from "@/app/features/editor/components/sidebar/font-size-tool/font-size-input";
+import { TbColorFilter } from "react-icons/tb";
 
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -348,6 +349,21 @@ export const Toolbar = ({
             value={properties.fontSize}
             onChange={onChangeFontSize}
           />
+        </div>
+      )}
+
+      {isImage && (
+        <div className="flex h-full items-center justify-center">
+          <Hint label="Filters" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("filter")}
+              size="icon"
+              variant="ghost"
+              className={cn(activeTool === "filter" && "bg-gray-100")}
+            >
+              <TbColorFilter className="size-4" />
+            </Button>
+          </Hint>
         </div>
       )}
 

@@ -22,6 +22,7 @@ import {
 } from "@/app/features/editor/types/shape-options.types";
 import { useCanvasEvents } from "@/app/features/editor/hooks/use-canvas-events";
 import { isTextTypeObject } from "@/app/features/editor/utils/is-text-type";
+import { createFilter } from "@/lib/utils";
 
 interface UseEditorProps {
   initialCanvas: fabric.Canvas;
@@ -473,6 +474,23 @@ const buildEditor = ({
         image.scaleToHeight(workspace?.height || 0);
 
         addToCanvas(image);
+      });
+    },
+
+    changeImageFilter: (value: string) => {
+      const objects = canvas.getActiveObjects();
+
+      objects.forEach((object) => {
+        if (object.isType("image")) {
+          const imageObject = object as fabric.FabricImage;
+
+          const effect = createFilter(value);
+
+          imageObject.filters = effect ? [effect] : [];
+          imageObject.applyFilters();
+
+          canvas.renderAll();
+        }
       });
     },
 

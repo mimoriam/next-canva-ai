@@ -64,6 +64,8 @@ export interface Editor {
 
   addImage: (value: string) => void;
 
+  changeImageFilter: (value: string) => void;
+
   delete: () => void;
 
   canvas: fabric.Canvas;
