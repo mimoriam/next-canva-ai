@@ -463,6 +463,19 @@ const buildEditor = ({
       addToCanvas(object);
     },
 
+    addImage: (value: string) => {
+      fabric.FabricImage.fromURL(value, {
+        crossOrigin: "anonymous",
+      }).then((image) => {
+        const workspace = getWorkspace();
+
+        image.scaleToWidth(workspace?.width || 0);
+        image.scaleToHeight(workspace?.height || 0);
+
+        addToCanvas(image);
+      });
+    },
+
     delete: () => {
       canvas.getActiveObjects().forEach((object) => canvas.remove(object));
       canvas.discardActiveObject();
