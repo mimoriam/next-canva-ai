@@ -28,3 +28,7 @@ npm i -D @tanstack/eslint-plugin-query
 npm i unsplash-js
 
 npm i uploadthing @uploadthing/react
+
+npx shadcn@latest add textarea
+npm i replicate
+npm i zod @hono/zod-validator
