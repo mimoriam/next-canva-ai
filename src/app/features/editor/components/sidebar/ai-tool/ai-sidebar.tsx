@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ToolSidebarClose } from "@/app/features/editor/components/sidebar/tool-sidebar-close";
 import React, { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { useGenerateImage } from "@/app/features/ai/use-generate-image";
 
 interface AiSidebarProps {
   editor: Editor | undefined;
@@ -23,22 +24,22 @@ export const AiSidebar = ({
     onChangeActiveTool("select");
   };
 
+  const mutation = useGenerateImage();
   const [value, setValue] = useState("");
-  let mutation;
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // TODO: block with paywall
 
-    // mutation.mutate(
-    //   { prompt: value },
-    //   {
-    //     onSuccess: ({ data }) => {
-    //       editor?.addImage(data);
-    //     },
-    //   },
-    // );
+    mutation.mutate(
+      { prompt: value },
+      {
+        onSuccess: ({ data }) => {
+          editor?.addImage(data);
+        },
+      },
+    );
   };
 
   return (
