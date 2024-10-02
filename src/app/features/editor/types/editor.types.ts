@@ -74,6 +74,9 @@ export interface Editor {
   onCopy: () => void;
   onPaste: () => void;
 
+  enableDrawingMode: () => void;
+  disableDrawingMode: () => void;
+
   canvas: fabric.Canvas;
   strokeColor: string;
   strokeWidth: number;
