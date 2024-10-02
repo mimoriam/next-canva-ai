@@ -23,6 +23,7 @@ import {
 import { useCanvasEvents } from "@/app/features/editor/hooks/use-canvas-events";
 import { isTextTypeObject } from "@/app/features/editor/utils/is-text-type";
 import { createFilter } from "@/lib/utils";
+import { useClipboard } from "@/app/features/editor/hooks/use-clipboard";
 
 interface UseEditorProps {
   initialCanvas: fabric.Canvas;
@@ -44,6 +45,9 @@ const buildEditor = ({
 
   fontFamily,
   setFontFamily,
+
+  copy,
+  paste,
 
   selectedObjects,
 }: BuildEditorProps): Editor => {
@@ -501,9 +505,13 @@ const buildEditor = ({
       canvas.renderAll();
     },
 
+    onCopy: () => copy(),
+    onPaste: () => paste(),
+
     canvas,
     strokeColor,
     strokeWidth,
+
     selectedObjects,
   };
 };
@@ -519,6 +527,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
+
+  const { copy, paste } = useClipboard({ canvas });
 
   useAutoResize({ canvas, container });
 
@@ -541,6 +551,9 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         fontFamily,
         setFontFamily,
 
+        copy,
+        paste,
+
         selectedObjects,
       });
     }
@@ -554,6 +567,9 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     strokeDashArray,
 
     fontFamily,
+
+    copy,
+    paste,
 
     selectedObjects,
   ]);

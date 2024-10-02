@@ -16,6 +16,9 @@ export type BuildEditorProps = {
   fontFamily: string;
   setFontFamily: (value: string) => void;
 
+  copy: () => void;
+  paste: () => void;
+
   selectedObjects: fabric.Object[];
 };
 
@@ -67,6 +70,9 @@ export interface Editor {
   changeImageFilter: (value: string) => void;
 
   delete: () => void;
+
+  onCopy: () => void;
+  onPaste: () => void;
 
   canvas: fabric.Canvas;
   strokeColor: string;
