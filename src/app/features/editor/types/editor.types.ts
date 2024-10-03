@@ -92,6 +92,12 @@ export interface Editor {
   canUndo: () => boolean;
   canRedo: () => boolean;
 
+  savePng: () => void;
+  saveJpg: () => void;
+  saveSvg: () => void;
+  saveJson: () => void;
+  loadJson: (json: string) => void;
+
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
 
