@@ -26,6 +26,7 @@ import { createFilter } from "@/lib/utils";
 import { useClipboard } from "@/app/features/editor/hooks/use-clipboard";
 import { useHistory } from "@/app/features/editor/hooks/use-history";
 import { JSON_KEYS } from "@/app/features/editor/types/json.types";
+import { useHotkeys } from "@/app/features/editor/hooks/use-hotkeys";
 
 interface UseEditorProps {
   initialCanvas: fabric.Canvas;
@@ -625,6 +626,15 @@ export const useEditor = ({
 
   useCanvasEvents({ save, canvas, setSelectedObjects, clearSelectionCallback });
 
+  useHotkeys({
+    undo,
+    redo,
+    copy,
+    paste,
+    save,
+    canvas,
+  });
+
   const editor = useMemo(() => {
     if (canvas) {
       return buildEditor({
@@ -722,6 +732,7 @@ export const useEditor = ({
       setCanvas(initialCanvas);
       setContainer(initialContainer);
 
+      // @ts-ignore
       const currentState = JSON.stringify(initialCanvas.toJSON(JSON_KEYS));
       canvasHistory.current = [currentState];
       setHistoryIndex(0);
