@@ -520,6 +520,28 @@ const buildEditor = ({
 
     autoZoom,
 
+    zoomIn: () => {
+      let zoomRatio = canvas.getZoom();
+      zoomRatio += 0.05;
+      const center = canvas.getCenterPoint();
+
+      canvas.zoomToPoint(
+        new fabric.Point(center.x, center.y),
+        zoomRatio > 1 ? 1 : zoomRatio,
+      );
+    },
+
+    zoomOut: () => {
+      let zoomRatio = canvas.getZoom();
+      zoomRatio -= 0.05;
+      const center = canvas.getCenterPoint();
+
+      canvas.zoomToPoint(
+        new fabric.Point(center.x, center.y),
+        zoomRatio < 0.2 ? 0.2 : zoomRatio,
+      );
+    },
+
     enableDrawingMode: () => {
       canvas.discardActiveObject();
       canvas.renderAll();

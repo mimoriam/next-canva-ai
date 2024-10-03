@@ -78,6 +78,9 @@ export interface Editor {
 
   autoZoom: () => void;
 
+  zoomIn: () => void;
+  zoomOut: () => void;
+
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
 
