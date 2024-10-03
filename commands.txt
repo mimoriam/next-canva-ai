@@ -34,3 +34,13 @@ npm i replicate
 npm i zod @hono/zod-validator
 
 npm i react-use
+
+npm i next-auth@beta
+npx auth secret
+npm i drizzle-orm drizzle-zod @neondatabase/serverless @auth/drizzle-adapter
+
+// https://github.com/honojs/middleware/tree/main/packages/auth-js:
+npm i @hono/auth-js @auth/core
+npm i bcryptjs
+npm i -D drizzle-kit @types/bcryptjs dotenv
+
