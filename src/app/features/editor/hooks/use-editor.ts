@@ -27,6 +27,7 @@ import { useClipboard } from "@/app/features/editor/hooks/use-clipboard";
 import { useHistory } from "@/app/features/editor/hooks/use-history";
 import { JSON_KEYS } from "@/app/features/editor/types/json.types";
 import { useHotkeys } from "@/app/features/editor/hooks/use-hotkeys";
+import { useWindowEvents } from "@/app/features/editor/hooks/use-window-events";
 
 interface UseEditorProps {
   initialCanvas: fabric.Canvas;
@@ -613,6 +614,9 @@ export const useEditor = ({
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
+
+  // Alert the user if they try to close the tab with unsaved changes:
+  useWindowEvents();
 
   const { save, canRedo, canUndo, undo, redo, canvasHistory, setHistoryIndex } =
     useHistory({
