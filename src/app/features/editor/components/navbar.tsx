@@ -22,13 +22,19 @@ import { Separator } from "@/components/ui/separator";
 import { Hint } from "@/components/hint";
 import { ActiveTool } from "@/app/features/editor/types/active-tool.types";
 import { cn } from "@/lib/utils";
+import { Editor } from "@/app/features/editor/types/editor.types";
 
 interface NavbarProps {
+  editor: Editor | undefined;
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
 }
 
-export const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
+export const Navbar = ({
+  editor,
+  activeTool,
+  onChangeActiveTool,
+}: NavbarProps) => {
   return (
     <nav className="lg:pl[34px] flex h-[68px] w-full items-center gap-x-8 border-b p-4">
       <Logo />
@@ -67,12 +73,22 @@ export const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
           </Button>
         </Hint>
         <Hint label="Undo" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}}>
+          <Button
+            disabled={!editor?.canUndo()}
+            variant="ghost"
+            size="icon"
+            onClick={() => editor?.onUndo()}
+          >
             <Undo2 className="size-4" />
           </Button>
         </Hint>
         <Hint label="Redo" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}}>
+          <Button
+            disabled={!editor?.canRedo()}
+            variant="ghost"
+            size="icon"
+            onClick={() => editor?.onRedo()}
+          >
             <Redo2 className="size-4" />
           </Button>
         </Hint>

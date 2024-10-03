@@ -21,6 +21,12 @@ export type BuildEditorProps = {
 
   autoZoom: () => void;
 
+  undo: () => void;
+  redo: () => void;
+  save: (skip?: boolean) => void;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
+
   selectedObjects: fabric.Object[];
 };
 
@@ -81,6 +87,11 @@ export interface Editor {
   zoomIn: () => void;
   zoomOut: () => void;
 
+  onUndo: () => void;
+  onRedo: () => void;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
+
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
 
@@ -95,5 +106,13 @@ export interface Editor {
 }
 
 export interface EditorHookProps {
+  defaultState?: string;
+  defaultWidth?: number;
+  defaultHeight?: number;
   clearSelectionCallback?: () => void;
+  saveCallback?: (values: {
+    json: string;
+    height: number;
+    width: number;
+  }) => void;
 }

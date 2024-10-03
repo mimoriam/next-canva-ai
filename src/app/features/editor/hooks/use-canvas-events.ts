@@ -2,12 +2,14 @@ import * as fabric from "fabric";
 import { useEffect } from "react";
 
 interface UseCanvasEventsProps {
+  save: () => void;
   canvas: fabric.Canvas | null;
   setSelectedObjects: (objects: fabric.Object[]) => void;
   clearSelectionCallback?: () => void;
 }
 
 export const useCanvasEvents = ({
+  save,
   canvas,
   setSelectedObjects,
   clearSelectionCallback,
@@ -15,6 +17,10 @@ export const useCanvasEvents = ({
   let disposeCreated: VoidFunction;
   let disposeUpdated: VoidFunction;
   let disposeCleared: VoidFunction;
+
+  let disposeAdded: VoidFunction;
+  let disposeRemoved: VoidFunction;
+  let disposeModified: VoidFunction;
 
   useEffect(() => {
     if (canvas) {
@@ -28,17 +34,22 @@ export const useCanvasEvents = ({
         setSelectedObjects([]);
         clearSelectionCallback?.();
       });
+
+      disposeAdded = canvas.on("object:added", () => save());
+      disposeRemoved = canvas.on("object:removed", () => save());
+      disposeModified = canvas.on("object:modified", () => save());
     }
 
     return () => {
       if (canvas) {
-        // canvas.off("selection:created");
-        // canvas.off("selection:updated");
-        // canvas.off("selection:cleared");
         disposeCreated();
         disposeUpdated();
         disposeCleared();
+
+        disposeAdded();
+        disposeRemoved();
+        disposeModified();
       }
     };
-  }, [canvas, setSelectedObjects, clearSelectionCallback]);
+  }, [save, canvas, setSelectedObjects, clearSelectionCallback]);
 };
