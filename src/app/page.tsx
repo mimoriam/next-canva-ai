@@ -1,13 +1,25 @@
-"use client";
-
+import { auth, signIn } from "@/auth";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
-export default function Home() {
-  const router = useRouter();
+export default async function Home() {
+  const session = await auth();
+
   return (
     <div>
-      <Button onClick={() => router.push("/editor/123")}>Hello Mimo!</Button>
+      <h4>{JSON.stringify(session)}</h4>
+
+      <form
+        action={async () => {
+          "use server";
+          await signIn("github", { redirectTo: "/" });
+        }}
+      >
+        <Button type="submit">Signin with GitHub</Button>
+      </form>
+      <Link href="/editor/1234">
+        <Button>Editor</Button>
+      </Link>
     </div>
   );
 }
