@@ -49,6 +49,8 @@ const buildEditor = ({
   copy,
   paste,
 
+  autoZoom,
+
   selectedObjects,
 }: BuildEditorProps): Editor => {
   const getWorkspace = () => {
@@ -516,6 +518,8 @@ const buildEditor = ({
     onCopy: () => copy(),
     onPaste: () => paste(),
 
+    autoZoom,
+
     enableDrawingMode: () => {
       canvas.discardActiveObject();
       canvas.renderAll();
@@ -527,10 +531,27 @@ const buildEditor = ({
       canvas.freeDrawingBrush.width = strokeWidth;
       canvas.freeDrawingBrush.color = strokeColor;
     },
+
     disableDrawingMode: () => {
       canvas.isDrawingMode = false;
     },
 
+    changeSize: (value: { width: number; height: number }) => {
+      const workspace = getWorkspace();
+      workspace?.set(value);
+      autoZoom();
+      // save();
+    },
+
+    changeBackground: (value: string) => {
+      const workspace = getWorkspace();
+      workspace?.set({ fill: value });
+
+      canvas.renderAll();
+      // save();
+    },
+
+    getWorkspace,
     canvas,
     strokeColor,
     strokeWidth,
@@ -553,7 +574,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
   const { copy, paste } = useClipboard({ canvas });
 
-  useAutoResize({ canvas, container });
+  const { autoZoom } = useAutoResize({ canvas, container });
 
   useCanvasEvents({ canvas, setSelectedObjects, clearSelectionCallback });
 
@@ -577,6 +598,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         copy,
         paste,
 
+        autoZoom,
+
         selectedObjects,
       });
     }
@@ -593,6 +616,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
     copy,
     paste,
+
+    autoZoom,
 
     selectedObjects,
   ]);

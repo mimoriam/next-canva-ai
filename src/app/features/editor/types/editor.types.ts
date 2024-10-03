@@ -19,6 +19,8 @@ export type BuildEditorProps = {
   copy: () => void;
   paste: () => void;
 
+  autoZoom: () => void;
+
   selectedObjects: fabric.Object[];
 };
 
@@ -74,9 +76,15 @@ export interface Editor {
   onCopy: () => void;
   onPaste: () => void;
 
+  autoZoom: () => void;
+
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
 
+  changeBackground: (value: string) => void;
+  changeSize: (value: { width: number; height: number }) => void;
+
+  getWorkspace: () => fabric.Object | undefined;
   canvas: fabric.Canvas;
   strokeColor: string;
   strokeWidth: number;
