@@ -1,22 +1,15 @@
-import { auth, signIn } from "@/auth";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { protectServer } from "@/app/features/auth/utils";
 
 export default async function Home() {
-  const session = await auth();
+  const session = await protectServer();
 
   return (
     <div>
-      <h4>{JSON.stringify(session)}</h4>
+      <h1>{JSON.stringify(session)}</h1>
+      {/*<h1>Test</h1>*/}
 
-      <form
-        action={async () => {
-          "use server";
-          await signIn("github", { redirectTo: "/" });
-        }}
-      >
-        <Button type="submit">Signin with GitHub</Button>
-      </form>
       <Link href="/editor/1234">
         <Button>Editor</Button>
       </Link>

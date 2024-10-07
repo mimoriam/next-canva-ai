@@ -44,3 +44,5 @@ npm i @hono/auth-js @auth/core
 npm i bcryptjs
 npm i -D drizzle-kit @types/bcryptjs dotenv
 npm i -D pg
+
+npx shadcn@latest add card

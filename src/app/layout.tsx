@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
 import { Providers } from "@/components/providers";
-import { NextAuthProvider } from "@/app/session-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,9 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* React query provider: */}
-        {/*<NextAuthProvider>*/}
         <Providers>{children}</Providers>
-        {/*</NextAuthProvider>*/}
       </body>
     </html>
   );
