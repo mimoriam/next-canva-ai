@@ -8,6 +8,4 @@ export const protectServer = async () => {
   if (!session) {
     redirect("/api/auth/signin");
   }
-
-  return session;
 };

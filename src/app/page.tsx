@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { protectServer } from "@/app/features/auth/utils";
+import { auth } from "@/auth";
 
 export default async function Home() {
-  const session = await protectServer();
+  const session = await auth();
 
   return (
     <div>

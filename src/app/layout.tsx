@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
 import { Providers } from "@/components/providers";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* React query provider: */}
-        <Providers>{children}</Providers>
+        <Providers>
+          <Toaster />
+          {children}
+        </Providers>
       </body>
     </html>
   );
