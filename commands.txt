@@ -47,3 +47,4 @@ npm i -D pg
 
 npx shadcn@latest add card
 npm i sonner
+npx shadcn@latest add avatar
