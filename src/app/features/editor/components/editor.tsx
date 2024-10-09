@@ -23,7 +23,13 @@ import { RemoveBgSidebar } from "@/app/features/editor/components/sidebar/bg-rem
 import { DrawSidebar } from "@/app/features/editor/components/sidebar/draw-tool/draw-sidebar";
 import { SettingsSidebar } from "@/app/features/editor/components/sidebar/settings-tool/settings-sidebar";
 
-export const Editor = () => {
+import { ResponseType } from "@/app/features/projects/api/use-get-projects";
+
+interface EditorProps {
+  initialData: ResponseType["data"];
+}
+
+export const Editor = ({ initialData }: EditorProps) => {
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
 
   const onClearSelection = useCallback(() => {
@@ -81,6 +87,7 @@ export const Editor = () => {
   return (
     <div className="flex h-full flex-col">
       <Navbar
+        id={initialData.id}
         editor={editor}
         activeTool={activeTool}
         onChangeActiveTool={onChangeActiveTool}

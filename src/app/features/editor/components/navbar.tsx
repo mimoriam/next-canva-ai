@@ -29,21 +29,21 @@ import { BsCloudCheck, BsCloudSlash } from "react-icons/bs";
 import { UserButton } from "@/app/features/auth/components/user-button";
 
 interface NavbarProps {
-  // id: string;
+  id: string;
   editor: Editor | undefined;
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
 }
 
 export const Navbar = ({
-  // id,
+  id,
   editor,
   activeTool,
   onChangeActiveTool,
 }: NavbarProps) => {
   const data = useMutationState({
     filters: {
-      mutationKey: ["project", { id: "1" }],
+      mutationKey: ["project", { id }],
       exact: true,
     },
     select: (mutation) => mutation.state.status,
