@@ -15,9 +15,11 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
+import { useSignUp } from "@/app/features/auth/hooks/use-sign-up";
+import { TriangleAlert } from "lucide-react";
 
 export const SignUpCard = () => {
-  // const mutation = useSignUp();
+  const mutation = useSignUp();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,8 +30,23 @@ export const SignUpCard = () => {
 
   const onCredentialSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: sign up mutation
-    console.log("sign up");
+
+    mutation.mutate(
+      {
+        name,
+        email,
+        password,
+      },
+      {
+        onSuccess: async () => {
+          await signIn("credentials", {
+            email,
+            password,
+            redirectTo: "/",
+          });
+        },
+      },
+    );
   };
 
   return (
@@ -40,16 +57,16 @@ export const SignUpCard = () => {
           Use your email or another service to continue
         </CardDescription>
       </CardHeader>
-      {/* {!!mutation.error && (
+      {!!mutation.error && (
         <div className="mb-6 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
           <TriangleAlert className="size-4" />
           <p>Something went wrong</p>
         </div>
-      )} */}
+      )}
       <CardContent className="space-y-5 px-0 pb-0">
         <form onSubmit={onCredentialSignUp} className="space-y-2.5">
           <Input
-            // disabled={mutation.isPending}
+            disabled={mutation.isPending}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Full name"
@@ -57,7 +74,7 @@ export const SignUpCard = () => {
             required
           />
           <Input
-            // disabled={mutation.isPending}
+            disabled={mutation.isPending}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
@@ -65,7 +82,7 @@ export const SignUpCard = () => {
             required
           />
           <Input
-            // disabled={mutation.isPending}
+            disabled={mutation.isPending}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -75,7 +92,7 @@ export const SignUpCard = () => {
             maxLength={20}
           />
           <Button
-            // disabled={mutation.isPending}
+            disabled={mutation.isPending}
             type="submit"
             className="w-full"
             size="lg"
@@ -86,7 +103,7 @@ export const SignUpCard = () => {
         <Separator />
         <div className="flex flex-col gap-y-2.5">
           <Button
-            // disabled={mutation.isPending}
+            disabled={mutation.isPending}
             onClick={() => onProviderSignUp("google")}
             variant="outline"
             size="lg"
@@ -96,7 +113,7 @@ export const SignUpCard = () => {
             Continue with Google
           </Button>
           <Button
-            // disabled={mutation.isPending}
+            disabled={mutation.isPending}
             onClick={() => onProviderSignUp("github")}
             variant="outline"
             size="lg"
