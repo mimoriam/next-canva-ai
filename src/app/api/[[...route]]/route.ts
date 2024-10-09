@@ -3,6 +3,7 @@ import { handle } from "hono/vercel";
 import images from "./images";
 import ai from "./ai";
 import users from "./users";
+import projects from "./projects";
 import { AuthConfig, initAuthConfig } from "@hono/auth-js";
 import authConfig from "@/auth.config";
 
@@ -24,7 +25,8 @@ app.use("*", initAuthConfig(getAuthConfig));
 const routes = app
   .route("/ai", ai)
   .route("/users", users)
-  .route("/images", images);
+  .route("/images", images)
+  .route("/projects", projects);
 
 export const GET = handle(app);
 export const POST = handle(app);
